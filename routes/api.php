@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\ServiceCategoryController;
 use App\Http\Controllers\API\ServiceController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -20,3 +21,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('services', [ServiceController::class, 'all']);
+Route::get('categories', [ServiceCategoryController::class, 'all']);
