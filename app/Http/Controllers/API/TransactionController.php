@@ -10,6 +10,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class TransactionController extends Controller
@@ -48,6 +49,83 @@ class TransactionController extends Controller
             'Data list transaksi berhasil diambil',
         );
     }
+
+    // public function getLeastBusyTherapist()
+    // {
+    //     $interval = 2; // Tentukan interval waktu dalam satuan yang sesuai dengan kebutuhan Anda
+
+    //     if (Transaction::count() == 0) {
+    //         return User::where('roles', '=', 'therapist')->first();
+    //     } else {
+    //         $lastAssignedTherapistId = Cache::get('last_assigned_therapist_id');
+    //         $allTherapists = User::where('roles', '=', 'therapist')->get();
+    //         $totalTherapists = $allTherapists->count();
+
+    //         if ($lastAssignedTherapistId === null) {
+    //             $leastBusyTherapist = $allTherapists->first();
+    //         } else {
+    //             $lastAssignedTherapistIndex = $allTherapists->pluck('id')->search($lastAssignedTherapistId);
+
+    //             if ($lastAssignedTherapistIndex === false) {
+    //                 $leastBusyTherapist = $allTherapists->first();
+    //             } else {
+    //                 $nextTherapistIndex = ($lastAssignedTherapistIndex + $interval) % $totalTherapists;
+    //                 $leastBusyTherapist = $allTherapists[$nextTherapistIndex];
+    //             }
+    //         }
+
+    //         Cache::put('last_assigned_therapist_id', $leastBusyTherapist->id, 0); // Simpan ID terapis terakhir yang ditugaskan dalam cache untuk digunakan di iterasi berikutnya
+
+    //         return $leastBusyTherapist;
+    //     }
+    // }
+
+    // public function checkout(Request $request)
+    // {
+    //     $request->validate([
+    //         'items' => 'required|array',
+    //         'items.*.id' => 'exists:services,id',
+    //         'total_price' => 'required',
+    //         'extra_price' => 'required',
+    //         'status' => 'required|in:PENDING,SUCCESS,CANCELLED,FAILED'
+    //     ]);
+
+    //     try {
+    //         $user = Auth::user();
+    //         if ($user->roles != "therapist") {
+    //             $therapistId = $this->getLeastBusyTherapist()->id;
+    //             $userId = $user->id;
+    //             $transaction = Transaction::create([
+    //                 'user_id' => $userId,
+    //                 'therapist_id' => $therapistId,
+    //                 'address' => $request->address,
+    //                 'total_price' => $request->total_price,
+    //                 'extra_price' => $request->extra_price,
+    //                 'status' => $request->status
+    //             ]);
+
+    //             foreach ($request->items as $service) {
+    //                 TransactionItem::create([
+    //                     'users_id' => $user->id,
+    //                     'services_id' => $service['id'],
+    //                     'transactions_id' => $transaction->id,
+    //                     'quantity' => $service['quantity'],
+    //                 ]);
+    //             }
+
+    //             $transaction = Transaction::where('user_id', $userId)->first();
+    //             return ResponseFormatter::success($transaction->load('items.service'), 'Transaksi berhasil');
+    //         } else {
+    //             return ResponseFormatter::error(null, "Therapists cannot create transactions.");
+    //         }
+    //     } catch (Exception $err) {
+    //         return ResponseFormatter::error([
+    //             'message' => 'Something went wrong',
+    //             'error' => $err
+    //         ], 'Server Error', 500);
+    //     }
+    // }
+
 
     public function getLeastBusyTherapist()
     {
