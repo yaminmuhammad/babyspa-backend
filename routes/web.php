@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ServiceCategoryController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ServiceGalleryController;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,17 +39,17 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         Route::get('/', [DashboardController::class, 'index'])->name('index');
 
         Route::middleware(['admin'])->group(function () {
-            // Route::resource('product', ProductController::class);
+            Route::resource('service', ServiceController::class);
             Route::resource('category', ServiceCategoryController::class);
-            // Route::resource('product.gallery', ProductGalleryController::class)->shallow()->only([
-            //     'index', 'create', 'store', 'destroy'
-            // ]);
-            // Route::resource('transaction', TransactionController::class)->only([
-            //     'index', 'show', 'edit', 'update'
-            // ]);
-            // Route::resource('user', UserController::class)->only([
-            //     'index', 'edit', 'update', 'destroy'
-            // ]);
+            Route::resource('service.gallery', ServiceGalleryController::class)->shallow()->only([
+                'index', 'create', 'store', 'destroy'
+            ]);
+            Route::resource('transaction', TransactionController::class)->only([
+                'index', 'show', 'edit', 'update'
+            ]);
+            Route::resource('user', UserController::class)->only([
+                'index', 'edit', 'update', 'destroy'
+            ]);
         });
     });
 });

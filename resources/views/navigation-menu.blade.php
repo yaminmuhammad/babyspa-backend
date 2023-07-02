@@ -21,6 +21,21 @@
                         {{ __('Category') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('dashboard.service.index') }}" :active="request()->routeIs('dashboard.service.index')">
+                        {{ __('Service') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('dashboard.transaction.index') }}" :active="request()->routeIs('dashboard.transaction.index')">
+                        {{ __('Transaction') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('dashboard.user.index') }}" :active="request()->routeIs('dashboard.user.index')">
+                        {{ __('User') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -146,9 +161,27 @@
             <x-responsive-nav-link href="{{ route('dashboard.index') }}" :active="request()->routeIs('dashboard.index')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @if (Auth::user()->roles == 'ADMIN')
             <x-responsive-nav-link href="{{ route('dashboard.category.index') }}" :active="request()->routeIs('dashboard.index')">
                 {{ __('Category') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link href="{{ route('dashboard.service.index') }}" :active="request()->routeIs('dashboard.index')">
+                {{ __('Service') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link href="{{ route('dashboard.transaction.index') }}" :active="request()->routeIs('dashboard.index')">
+                {{ __('Transaction') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link href="{{ route('dashboard.user.index') }}" :active="request()->routeIs('dashboard.index')">
+                {{ __('User') }}
+            </x-responsive-nav-link>
+            @endif
+
+
+
         </div>
 
         <!-- Responsive Settings Options -->
