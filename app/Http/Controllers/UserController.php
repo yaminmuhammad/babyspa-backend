@@ -67,7 +67,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('pages.dashboard.user.edit', [
+            'item' => $user
+        ]);
     }
 
     /**
@@ -87,6 +89,8 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        return redirect()->route('dashboard.user.index');
     }
 }

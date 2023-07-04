@@ -47,6 +47,10 @@
                                 <td class="border px-6 py-4">{{ $transaction->user->name }}</td>
                             </tr>
                             <tr>
+                                <th class="border px-6 py-4 text-right">Name Terapist</th>
+                                <td class="border px-6 py-4">{{ $transaction->therapist->name }}</td>
+                            </tr>
+                            <tr>
                                 <th class="border px-6 py-4 text-right">Email</th>
                                 <td class="border px-6 py-4">{{ $transaction->user->email }}</td>
                             </tr>
@@ -63,7 +67,7 @@
                                 <td class="border px-6 py-4">{{ number_format($transaction->total_price) }}</td>
                             </tr>
                             <tr>
-                                <th class="border px-6 py-4 text-right">Shipping Price</th>
+                                <th class="border px-6 py-4 text-right">Extra Price</th>
                                 <td class="border px-6 py-4">{{ number_format($transaction->shipping_price) }}</td>
                             </tr>
                             <tr>

@@ -22,6 +22,10 @@
                         name: 'user.name'
                     },
                     {
+                        data: 'therapist.name',
+                        name: 'therapist.name'
+                    },
+                    {
                         data: 'total_price',
                         name: 'total_price'
                     },
@@ -50,6 +54,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nama</th>
+                                <th>Therapist</th>
                                 <th>Total Harga</th>
                                 <th>Status</th>
                                 <th>Aksi</th>
