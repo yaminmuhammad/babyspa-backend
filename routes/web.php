@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
                 'index', 'create', 'store', 'destroy'
             ]);
             Route::resource('transaction', TransactionController::class)->only([
-                'index', 'show', 'edit', 'update'
+                'index', 'show', 'edit', 'update', 'destroy'
             ]);
             Route::resource('user', UserController::class)->only([
                 'index', 'edit', 'update', 'destroy'
