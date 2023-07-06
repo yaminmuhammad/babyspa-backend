@@ -129,20 +129,24 @@ class TransactionController extends Controller
 
     public function getLeastBusyTherapist()
     {
+        // Memeriksa jika belum ada transaksi yang dilakukan
         if (Transaction::count() == 0) {
+            // Mengembalikan terapis pertama yang ditemukan
             return User::where('roles', '=', 'therapist')->first();
         } else {
             $joblessTherapists = User::whereNotIn('id', Transaction::select('therapist_id'))
                 ->where('roles', '=', 'therapist')
                 ->get();
 
+            // Memeriksa jika tidak ada terapis yang tidak sedang mengerjakan transaksi
             if ($joblessTherapists->count() == 0) {
+                // Mengambil terapis yang paling sedang tidak sibuk
                 $leastBusyTherapist = User::join('transactions', 'users.id', '=', 'transactions.therapist_id')
                     ->select('users.id', DB::raw('COUNT(transactions.therapist_id) as jobcount'))
                     ->groupBy('users.id')
                     ->orderBy('jobcount', 'asc')
                     ->first();
-
+                // Mengembalikan terapis paling sedang tidak sibuk
                 return User::where('id', '=', $leastBusyTherapist->id)->first();
             } else {
                 return $joblessTherapists->first();
@@ -164,8 +168,11 @@ class TransactionController extends Controller
         try {
             $user = Auth::user();
             if ($user->roles != "therapist") {
+                // Mendapatkan terapis paling sedang tidak sibuk
                 $therapistId = $this->getLeastBusyTherapist()->id;
                 $userId = $user->id;
+
+                // Membuat transaksi baru dengan terapis yang dipilih
                 $transaction = Transaction::create([
                     'user_id' => $userId,
                     'therapist_id' => $therapistId,
@@ -175,6 +182,7 @@ class TransactionController extends Controller
                     'status' => $request->status
                 ]);
 
+                // Menyimpan setiap item transaksi
                 foreach ($request->items as $service) {
                     TransactionItem::create([
                         'users_id' => Auth::user()->id,
@@ -184,6 +192,7 @@ class TransactionController extends Controller
                     ]);
                 }
 
+                // Mendapatkan transaksi yang baru saja dibuat
                 $transaction = Transaction::where('user_id', $userId)->first();
                 return ResponseFormatter::success($transaction->load('items.service'), 'Transaksi berhasil');
             } else {
