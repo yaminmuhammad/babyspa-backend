@@ -89,113 +89,100 @@ Ini adalah backend dari aplikasi pedikia yang menggunakan framework laravel dan 
       ``` 
 3. `LOGOUT` user
     - `POST` -> `/api/logout`
-
-    - Response:
-      ```json
-      "status": {
-         "code": 200,
-         "message": "Ok"
-      },
-      "data": [
-        {
-           "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
-           "date": "2023-12-08 05:17:42.583767+07",
-           "amount": 250000,
-           "transactionType": "CREDIT",
-           "balance": 50000000,
-           "description": "Tambahan jajan",
-           "createdAt": "2023-12-08 05:17:42.583767+07",
-           "updatedAt": "2023-12-08 05:17:42.583767+07"
-        }
-      ],
-      "paging": {
-         "page": 1,
-         "totalPages": 2,
-         "totalRows": 10,
-         "rowsPerPage": 5
-      }
-      ``` 
-4. `GET` by ID
-    - `GET` -> `/api/v1/expenses/a81bc81b-dead-4e5d-abff-90865d1e13b1`
-    - Response:
-      ```json
-      "status": {
-         "code": 200,
-         "message": "Created"
-      },
-      "data": {
-         "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
-         "date": "2023-12-08 05:17:42.583767+07",
-         "amount": 250000,
-         "transactionType": "CREDIT",
-         "balance": 50000000,
-         "description": "Tambahan jajan",
-         "createdAt": "2023-12-08 05:17:42.583767+07",
-         "updatedAt": "2023-12-08 05:17:42.583767+07"
-      }
-5. `GET` berdasarkan tipe transaksi
-    - `GET` -> `/api/v1/expenses/type/:type`
-    - Params:
-      ```
-      /credit
-      /debit
-      ``` 
-    - Response:
-      ```json
-      "status": {
-         "code": 200,
-         "message": "Ok"
-      },
-      "data": [
-        {
-           "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
-           "date": "2023-12-08 05:17:42.583767+07",
-           "amount": 250000,
-           "transactionType": "CREDIT",
-           "balance": 50000000,
-           "description": "Tambahan jajan",
-           "createdAt": "2023-12-08 05:17:42.583767+07",
-           "updatedAt": "2023-12-08 05:17:42.583767+07"
-        }
-      ],
-      "paging": {
-         "page": 1,
-         "totalPages": 2,
-         "totalRows": 10,
-         "rowsPerPage": 5
-      }
-      ``` 
-6. `UPDATE` pengeluaran
-    - `PUT` -> `/api/v1/expenses`
     - Request:
       ```json
       {
-         "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
-         "amount": 240000,
-         "transactionType": "CREDIT",
-         "description": "Tambahan jajan"
+         "access_token": "4|QOvbybaax4lxA8oXZ7TIvgv9od8DKQqJqSzzZs5B938e9f11"
       }
-      ``` 
+      ```
     - Response:
       ```json
-      "status": {
-         "code": 200,
-         "message": "Updated"
-      },
-      "data": {
-         "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
-         "date": "2023-12-08 05:17:42.583767+07",
-         "amount": 240000,
-         "transactionType": "CREDIT",
-         "description": "Update jajan",
-         "createdAt": "2023-12-08 05:17:42.583767+07",
-         "updatedAt": "2023-12-08 05:17:42.583767+07"
+      {
+         "meta": {
+            "code": 200,
+            "status": "success",
+            "message": "Token Revoked"
+         },
+         "data": true
       }
       ``` 
-- `DELETE` pengeluaran
-    - `DELETE` -> `/api/v1/expenses/a81bc81b-dead-4e5d-abff-90865d1e13b1`
+4. `UPDATE PROFILE` by ID
+    - `POST` -> `/api/user`
+    - Request:
+      ```json
+      {
+         "access_token": "4|QOvbybaax4lxA8oXZ7TIvgv9od8DKQqJqSzzZs5B938e9f11",
+         {
+         "name": "Jennie Kimi Hime",
+         "phone": "123123123",
+         "address": "teluk jambe",
+         "city": "karawang",
+         "email": "jennie.kim@blackpink.co",
+         }
+      }
+      ```
     - Response:
+      ```json
+      {
+         "meta": {
+            "code": 200,
+            "status": "success",
+            "message": "Profile Updated"
+         },
+         "data": {
+            "id": 1,
+            "name": "Jennie Kimi Hime",
+            "phone": "123123123",
+            "address": "teluk jambe",
+            "city": "karawang",
+            "roles": "pengguna",
+            "email": "jennie.kim@blackpink.co",
+            "email_verified_at": null,
+            "two_factor_confirmed_at": null,
+            "current_team_id": null,
+            "profile_photo_path": null,
+            "created_at": "2024-01-08T06:22:41.000000Z",
+            "updated_at": "2024-01-08T12:52:08.000000Z",
+            "profile_photo_url": "https://ui-avatars.com/api/?name=J+K+H&color=7F9CF5&background=EBF4FF"
+         }
+      }
       ```
-      204 no content
+5. `GET` Get user
+    - `GET` -> `/api/user`
+    - Request:
+      ```json
+      {
+         "access_token": "4|QOvbybaax4lxA8oXZ7TIvgv9od8DKQqJqSzzZs5B938e9f11",
+      }
       ```
+    - Response:
+      ```json
+      {
+         "meta": {
+            "code": 200,
+            "status": "success",
+            "message": "Data profile user berhasil diambil"
+         },
+         "data": {
+            "id": 1,
+            "name": "Jennie Kimi Hime",
+            "phone": "123123123",
+            "address": "teluk jambe",
+            "city": "karawang",
+            "roles": "pengguna",
+            "email": "jennie.kim@blackpink.co",
+            "email_verified_at": null,
+            "two_factor_confirmed_at": null,
+            "current_team_id": null,
+            "profile_photo_path": null,
+            "created_at": "2024-01-08T06:22:41.000000Z",
+            "updated_at": "2024-01-08T12:52:08.000000Z",
+            "profile_photo_url": "https://ui-avatars.com/api/?name=J+K+H&color=7F9CF5&background=EBF4FF"
+         }
+      }
+      ``` 
+Dan Masih banyak request lainnya. Untuk menjalankan aplikasi ada catatan pada file note.txt 
+
+Thanks.
+
      
