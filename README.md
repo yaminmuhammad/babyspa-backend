@@ -1,66 +1,201 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## BabySpa Backend
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Ini adalah backend dari aplikasi pedikia yang menggunakan framework laravel dan mySQL
 
-## About Laravel
+### API Documentation
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+1. `REGISTER` user
+    - `POST` -> `/api/register`
+    - Request:
+      ```json
+      {
+         "name": "dani",
+         "phone": "123123123",
+         "address": "teluk jambe",
+         "city": "karawang",
+         "roles": "pengguna || therapist",
+         "email": "dani@gmail.com",
+         "password": "12345678"
+      }
+      ``` 
+    - Response:
+      ```json
+      {
+        "meta": {
+            "code": 200,
+            "status": "success",
+            "message": "Success to Register"
+        },
+        "data": {
+            "access_token": "3|PfI0SOs5G7gy7176XFD8Kc0zRXvT4ugQOsLznNKJ",
+            "token_type": "Bearer",
+            "user": {
+                "id": 1,
+                "name": "dani",
+                "phone": "123123123",
+                "address": "teluk jambe",
+                "city": "karawang",
+                "roles": "pengguna",
+                "email": "dani@gmail.com",
+                "email_verified_at": null,
+                "two_factor_confirmed_at": null,
+                "current_team_id": null,
+                "profile_photo_path": null,
+                "created_at": "2021-04-14T07:13:57.000000Z",
+                "updated_at": "2021-04-14T07:13:57.000000Z",
+                "profile_photo_url": "https://ui-avatars.com/api/?name=Jennie+Kim&color=7F9CF5&background=EBF4FF"
+            }
+        }
+      }
+      ```
+2. `LOGIN` user
+    - `POST` -> `/api/login`
+    - Request:
+      ```json
+      {
+         "email": "dani@gmail.com",
+         "password": "12345678"
+      }
+      ``` 
+    - Response:
+      ```json
+         {
+               "meta": {
+                  "code": 200,
+                  "status": "success",
+                  "message": "Authenticated"
+               },
+               "data": {
+                  "access_token": "2|xINN9nawLmDDZKPGHxqQppgf7NRuHCELxp3xDzQW526dba2d",
+                  "token_type": "Bearer",
+                  "user": {
+                        "id": 1,
+                        "name": "dani",
+                        "phone": "123123123",
+                        "address": "teluk jambe",
+                        "city": "karawang",
+                        "roles": "pengguna",
+                        "email": "dani@gmail.com",
+                        "email_verified_at": null,
+                        "two_factor_confirmed_at": null,
+                        "current_team_id": null,
+                        "profile_photo_path": null,
+                        "created_at": "2024-01-08T06:22:41.000000Z",
+                        "updated_at": "2024-01-08T06:22:41.000000Z",
+                        "profile_photo_url": "https://ui-avatars.com/api/?name=d&color=7F9CF5&background=EBF4FF"
+                  }
+               }
+            }
+      ``` 
+3. `LOGOUT` user
+    - `POST` -> `/api/logout`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    - Response:
+      ```json
+      "status": {
+         "code": 200,
+         "message": "Ok"
+      },
+      "data": [
+        {
+           "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
+           "date": "2023-12-08 05:17:42.583767+07",
+           "amount": 250000,
+           "transactionType": "CREDIT",
+           "balance": 50000000,
+           "description": "Tambahan jajan",
+           "createdAt": "2023-12-08 05:17:42.583767+07",
+           "updatedAt": "2023-12-08 05:17:42.583767+07"
+        }
+      ],
+      "paging": {
+         "page": 1,
+         "totalPages": 2,
+         "totalRows": 10,
+         "rowsPerPage": 5
+      }
+      ``` 
+4. `GET` by ID
+    - `GET` -> `/api/v1/expenses/a81bc81b-dead-4e5d-abff-90865d1e13b1`
+    - Response:
+      ```json
+      "status": {
+         "code": 200,
+         "message": "Created"
+      },
+      "data": {
+         "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
+         "date": "2023-12-08 05:17:42.583767+07",
+         "amount": 250000,
+         "transactionType": "CREDIT",
+         "balance": 50000000,
+         "description": "Tambahan jajan",
+         "createdAt": "2023-12-08 05:17:42.583767+07",
+         "updatedAt": "2023-12-08 05:17:42.583767+07"
+      }
+5. `GET` berdasarkan tipe transaksi
+    - `GET` -> `/api/v1/expenses/type/:type`
+    - Params:
+      ```
+      /credit
+      /debit
+      ``` 
+    - Response:
+      ```json
+      "status": {
+         "code": 200,
+         "message": "Ok"
+      },
+      "data": [
+        {
+           "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
+           "date": "2023-12-08 05:17:42.583767+07",
+           "amount": 250000,
+           "transactionType": "CREDIT",
+           "balance": 50000000,
+           "description": "Tambahan jajan",
+           "createdAt": "2023-12-08 05:17:42.583767+07",
+           "updatedAt": "2023-12-08 05:17:42.583767+07"
+        }
+      ],
+      "paging": {
+         "page": 1,
+         "totalPages": 2,
+         "totalRows": 10,
+         "rowsPerPage": 5
+      }
+      ``` 
+6. `UPDATE` pengeluaran
+    - `PUT` -> `/api/v1/expenses`
+    - Request:
+      ```json
+      {
+         "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
+         "amount": 240000,
+         "transactionType": "CREDIT",
+         "description": "Tambahan jajan"
+      }
+      ``` 
+    - Response:
+      ```json
+      "status": {
+         "code": 200,
+         "message": "Updated"
+      },
+      "data": {
+         "id": "a81bc81b-dead-4e5d-abff-90865d1e13b1",
+         "date": "2023-12-08 05:17:42.583767+07",
+         "amount": 240000,
+         "transactionType": "CREDIT",
+         "description": "Update jajan",
+         "createdAt": "2023-12-08 05:17:42.583767+07",
+         "updatedAt": "2023-12-08 05:17:42.583767+07"
+      }
+      ``` 
+- `DELETE` pengeluaran
+    - `DELETE` -> `/api/v1/expenses/a81bc81b-dead-4e5d-abff-90865d1e13b1`
+    - Response:
+      ```
+      204 no content
+      ```
+     
