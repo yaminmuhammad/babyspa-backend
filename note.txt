@@ -1,0 +1,13 @@
+Flow 
+- git clone {project}
+- add file .env
+- buka file .env ubah DBName
+- download laragon
+- download pematon adminer custom github
+- extract dan taruh pada folder laragon/www
+- jalankan laragon buka browser adminer => adminer.test
+- buka folder project masuk ke terminal
+- jalankan composer update
+- composer install
+- php artisan key:generate
+- php artisan migrate --seed
