@@ -1,7 +1,7 @@
 Flow 
 - git clone {project}
 - add file .env
-- buka file .env ubah DBName
+- buka file .env ubah DBName dengan nama database local
 - download laragon
 - download pematon adminer custom github
 - extract dan taruh pada folder laragon/www
@@ -11,3 +11,4 @@ Flow
 - composer install
 - php artisan key:generate
 - php artisan migrate --seed
+- insert data pada table services, service_galleries, dan service_categories
