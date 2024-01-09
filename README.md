@@ -183,6 +183,6 @@ Ini adalah backend dari aplikasi pedikia yang menggunakan framework laravel dan 
       ``` 
 Dan Masih banyak request lainnya. Untuk menjalankan aplikasi ada catatan pada file note.txt 
 
-Thanks.
+Thanks 😁😁😁.
 
      
